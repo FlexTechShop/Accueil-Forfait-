@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Meilleur Service IPTV - HD, 4K Streaming | FlexTech Shop IPTV</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #e63946;
+    --primary-dark: #c1121f;
+    --dark: #0d0d0d;
+    --dark2: #161616;
+    --dark3: #1e1e1e;
+    --accent: #f4a261;
+    --text: #e0e0e0;
+    --text-muted: #9a9a9a;
+    --border: rgba(255,255,255,0.08);
+    --green: #06d6a0;
+    --whatsapp: #25d366;
+    --orange-money: #ff7900;
+    --wave: #0084ff;
+    --moov: #1ba0d7;
+    --binance: #f0b90b;
+    --radius: 12px;
+  }
+  html { scroll-behavior: smooth; }
+  body { 
+    font-family: 'Poppins', sans-serif; 
+    background: var(--dark); 
+    color: var(--text); 
+    overflow-x: hidden; 
+    line-height: 1.6;
+    width: 100%;
+    position: relative;
+  }
+
+  /* TOP BAR simplifiée */
+  .topbar { 
+    background: var(--primary); 
+    padding: 8px 16px; 
+    text-align: center; 
+    font-size: clamp(12px, 3.5vw, 13px); 
+    font-weight: 500; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 16px; 
+    width: 100%;
+  }
+  .topbar span { color: #fff; display: inline-flex; align-items: center; gap: 4px; }
+  
+  /* NAVBAR */
+  nav { 
+    background: rgba(13,13,13,0.97); 
+    backdrop-filter: blur(12px); 
+    padding: 0 5%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 1px solid var(--border); 
+    min-height: 68px;
+    width: 100%;
+  }
+ 
+  .nav-links { 
+    display: flex; 
+    list-style: none; 
+    gap: 5px; 
+    align-items: center; 
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links > li { position: relative; }
+  .nav-links > li > a { 
+    color: var(--text); 
+    text-decoration: none; 
+    padding: 8px 14px; 
+    border-radius: 6px; 
+    font-size: 14px; 
+    font-weight: 500; 
+    transition: all 0.2s; 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+    white-space: nowrap;
+  }
+  .nav-links > li > a:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .nav-links .dropdown { 
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    background: #1a1a1a; 
+    border: 1px solid var(--border); 
+    border-radius: 8px; 
+    min-width: 180px; 
+    padding: 6px 0; 
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5); 
+  }
+  .nav-links li:hover .dropdown { display: block; }
+  .nav-links .dropdown a { 
+    display: block; 
+    padding: 9px 16px; 
+    color: var(--text); 
+    text-decoration: none; 
+    font-size: 13px; 
+    transition: all 0.2s; 
+  }
+  .nav-links .dropdown a:hover { background: rgba(255,255,255,0.06); color: #fff; }
+  .nav-cta { 
+    background: var(--primary) !important; 
+    color: #fff !important; 
+    padding: 9px 20px !important; 
+    border-radius: 6px !important; 
+    font-weight: 600 !important; 
+  }
+  .nav-cta:hover { background: var(--primary-dark) !important; }
+  .hamburger { 
+    display: none; 
+    flex-direction: column; 
+    gap: 5px; 
+    cursor: pointer; 
+    padding: 5px; 
+    z-index: 1001;
+  }
+  .hamburger span { 
+    width: 24px; 
+    height: 2px; 
+    background: #fff; 
+    border-radius: 2px; 
+    transition: 0.3s;
+  }
+
+  /* HERO (un seul slide) */
+  .hero { 
+    position: relative; 
+    height: clamp(400px, 60vh, 560px); 
+    overflow: hidden; 
+    width: 100%;
+  }
+  .hero-slide { 
+    position: absolute; 
+    inset: 0; 
+    opacity: 0; 
+    transition: opacity 1s ease; 
+    display: flex; 
+    align-items: center; 
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-bg { 
+    position: absolute; 
+    inset: 0; 
+    background-size: cover; 
+    background-position: center; 
+    filter: brightness(0.3); 
+  }
+  .hero-content { 
+    position: relative; 
+    z-index: 2; 
+    padding: 0 8%; 
+    max-width: min(650px, 90%); 
+    width: 100%;
+  }
+  .hero-badge { 
+    display: inline-block; 
+    background: var(--primary); 
+    color: #fff; 
+    font-size: clamp(10px, 2.5vw, 11px); 
+    font-weight: 700; 
+    padding: 4px 12px; 
+    border-radius: 4px; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    margin-bottom: 16px; 
+  }
+  .hero-content h1 { 
+    font-size: clamp(24px, 6vw, 52px); 
+    font-weight: 800; 
+    line-height: 1.15; 
+    margin-bottom: 14px; 
+    color: #fff; 
+  }
+  .hero-content p { 
+    font-size: clamp(14px, 3.5vw, 15px); 
+    color: rgba(255,255,255,0.75); 
+    margin-bottom: 28px; 
+    line-height: 1.7; 
+    max-width: 500px; 
+  }
+  .hero-btn { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    background: var(--primary); 
+    color: #fff; 
+    padding: clamp(12px, 3vw, 14px) clamp(20px, 4vw, 28px); 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: clamp(14px, 3.5vw, 15px); 
+    transition: all 0.3s; 
+    box-shadow: 0 4px 20px rgba(230,57,70,0.4); 
+  }
+  .hero-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+  .hero-gradient { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    height: 120px; 
+    background: linear-gradient(transparent, var(--dark)); 
+    z-index: 3; 
+  }
+
+  /* SECTION */
+  section { 
+    padding: clamp(40px, 8vw, 80px) 5%; 
+    width: 100%;
+  }
+  .section-label { 
+    display: inline-block; 
+    color: var(--primary); 
+    font-size: clamp(11px, 2.5vw, 12px); 
+    font-weight: 700; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    margin-bottom: 10px; 
+  }
+  .section-title { 
+    font-size: clamp(22px, 5vw, 42px); 
+    font-weight: 800; 
+    margin-bottom: 12px; 
+    line-height: 1.2; 
+  }
+  .section-sub { 
+    color: var(--text-muted); 
+    font-size: clamp(14px, 3.5vw, 16px); 
+    max-width: 580px; 
+    margin: 0 auto 50px; 
+  }
+  .text-center { text-align: center; }
+
+  /* PRICING avec prix F CFA - uniquement Opplex */
+  .pricing-section { 
+    background: var(--dark2); 
+    width: 100%;
+  }
+  .pricing-header { 
+    text-align: center; 
+    margin-bottom: 40px; 
+  }
+  .toggle-group { 
+    display: inline-flex; 
+    background: var(--dark3); 
+    border-radius: 10px; 
+    padding: 5px; 
+    margin-bottom: 16px; 
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .toggle-btn { 
+    padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 28px); 
+    border: none; 
+    background: transparent; 
+    color: var(--text-muted); 
+    font-size: clamp(13px, 3vw, 14px); 
+    font-weight: 600; 
+    border-radius: 7px; 
+    cursor: pointer; 
+    transition: all 0.3s; 
+    font-family: 'Poppins', sans-serif; 
+    white-space: nowrap;
+  }
+  .toggle-btn.active { background: var(--primary); color: #fff; }
+  .pricing-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); 
+    gap: 20px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    width: 100%;
+  }
+  .price-card { 
+    background: var(--dark3); 
+    border: 1px solid var(--border); 
+    border-radius: var(--radius); 
+    padding: clamp(20px, 4vw, 30px) clamp(16px, 3vw, 24px); 
+    transition: all 0.3s; 
+    position: relative; 
+    overflow: hidden; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    height: 3px; 
+    background: linear-gradient(90deg, var(--primary), var(--accent)); 
+    opacity: 0; 
+    transition: opacity 0.3s; 
+  }
+  .price-card:hover { 
+    transform: translateY(-6px); 
+    border-color: rgba(230,57,70,0.3); 
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4); 
+  }
+  .price-card:hover::before, .price-card.popular::before { opacity: 1; }
+  .price-card.popular { border-color: var(--primary); }
+  .popular-badge { 
+    position: absolute; 
+    top: 14px; 
+    right: 14px; 
+    background: var(--primary); 
+    color: #fff; 
+    font-size: 10px; 
+    font-weight: 700; 
+    padding: 3px 10px; 
+    border-radius: 20px; 
+    letter-spacing: 0.5px; 
+  }
+  .price-card h3 { 
+    font-size: clamp(14px, 3vw, 15px); 
+    font-weight: 700; 
+    margin-bottom: 6px; 
+    color: #fff; 
+  }
+  .price-amount { 
+    font-size: clamp(24px, 5vw, 28px); 
+    font-weight: 900; 
+    color: var(--primary); 
+    margin: 10px 0 4px; 
+    font-family: 'Montserrat', sans-serif; 
+  }
+  .price-amount span { 
+    font-size: clamp(11px, 2.5vw, 12px); 
+    color: var(--text-muted); 
+    font-weight: 400; 
+  }
+  .price-features { 
+    list-style: none; 
+    margin: 16px 0 24px; 
+    flex: 1;
+  }
+  .price-features li { 
+    font-size: clamp(12px, 2.8vw, 13px); 
+    color: var(--text-muted); 
+    padding: 6px 0; 
+    border-bottom: 1px solid var(--border); 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+  }
+  .price-features li::before { 
+    content: '✓'; 
+    color: var(--green); 
+    font-weight: 700; 
+    flex-shrink: 0; 
+  }
+  .btn-buy { 
+    display: block; 
+    text-align: center; 
+    background: var(--primary); 
+    color: #fff; 
+    padding: clamp(10px, 2.5vw, 12px); 
+    border-radius: 7px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: clamp(13px, 3vw, 14px); 
+    transition: all 0.3s; 
+    margin-top: auto;
+  }
+  .btn-buy:hover { background: var(--primary-dark); }
+  .pricing-panels > div { display: none; }
+  .pricing-panels > div.active { display: block; }
+
+  /* FEATURES SECTION */
+  .features-inner { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); 
+    gap: 40px; 
+    align-items: center; 
+  }
+  .features-imgs { 
+    position: relative; 
+    height: clamp(300px, 50vw, 400px); 
+    width: 100%;
+  }
+  .features-imgs img { 
+    position: absolute; 
+    border-radius: 12px; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .features-imgs img:first-child { 
+    width: 65%; 
+    left: 0; 
+    top: 0; 
+    height: 55%; 
+  }
+  .features-imgs img:nth-child(2) { 
+    width: 55%; 
+    right: 0; 
+    top: 38%; 
+    height: 50%; 
+  }
+  .features-imgs img:nth-child(3) { 
+    width: 40%; 
+    left: 10%; 
+    top: 58%; 
+    z-index: 2; 
+    height: 38%; 
+  }
+  .features-list { 
+    list-style: none; 
+    margin: 30px 0; 
+  }
+  .features-list li { 
+    display: flex; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+    font-size: clamp(14px, 3vw, 15px); 
+  }
+  .feat-icon { 
+    font-size: 24px; 
+    flex-shrink: 0; 
+  }
+
+  /* SERVICES */
+  .services-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); 
+    gap: 25px; 
+    margin-top: 40px; 
+  }
+  .service-card { 
+    background: var(--dark3); 
+    border: 1px solid var(--border); 
+    border-radius: var(--radius); 
+    padding: 25px 20px; 
+    text-align: center; 
+    transition: 0.3s; 
+  }
+  .service-card:hover { transform: translateY(-5px); }
+  .service-icon-box { 
+    font-size: 40px; 
+    margin-bottom: 15px; 
+  }
+  .service-card h4 { 
+    font-size: clamp(16px, 3.5vw, 18px); 
+    margin-bottom: 10px; 
+    color: #fff; 
+  }
+  .service-card p { 
+    font-size: clamp(13px, 2.8vw, 14px); 
+    color: var(--text-muted); 
+  }
+
+  /* PARTENAIRES SECTION */
+  .partners-section { 
+    padding: 40px 5%; 
+    overflow: hidden; 
+    width: 100%;
+  }
+  .partners-track { 
+    display: flex; 
+    gap: 30px; 
+    justify-content: center; 
+    flex-wrap: wrap;
+  }
+  .partner-logo { 
+    height: 40px; 
+    width: auto; 
+    opacity: 0.7; 
+    transition: 0.3s; 
+    max-width: 150px;
+    object-fit: contain;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials-section { 
+    background: var(--dark2); 
+    padding: 60px 5%; 
+    width: 100%;
+  }
+  .testimonials-track-wrap { 
+    overflow: hidden; 
+    width: 100%;
+  }
+  .testimonials-track { 
+    display: flex; 
+    gap: 20px; 
+    overflow-x: auto; 
+    padding: 20px 0 30px; 
+    scrollbar-width: thin; 
+    -webkit-overflow-scrolling: touch;
+  }
+  .testi-card { 
+    min-width: min(280px, 85%); 
+    background: var(--dark3); 
+    border: 1px solid var(--border); 
+    border-radius: var(--radius); 
+    padding: 20px; 
+    flex-shrink: 0; 
+  }
+  .testi-stars { 
+    color: #ffb703; 
+    font-size: 14px; 
+    margin-bottom: 10px; 
+  }
+  .testi-text { 
+    font-size: clamp(13px, 3vw, 14px); 
+    color: var(--text-muted); 
+    margin-bottom: 15px; 
+  }
+  .testi-author { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+  }
+  .testi-avatar { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+  }
+  .testi-name { 
+    font-weight: 600; 
+    font-size: 14px; 
+  }
+
+  /* CTA SECTION */
+  .cta-section { 
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+    padding: clamp(40px, 8vw, 60px) 5%; 
+    text-align: center; 
+    width: 100%;
+  }
+  .cta-section h2 { 
+    font-size: clamp(20px, 5vw, 32px); 
+    font-weight: 800; 
+    margin-bottom: 15px; 
+    color: #fff; 
+  }
+  .cta-section p { 
+    font-size: clamp(14px, 3.5vw, 16px); 
+    margin-bottom: 25px; 
+    color: rgba(255,255,255,0.9); 
+  }
+  .cta-btn { 
+    display: inline-block; 
+    background: #fff; 
+    color: var(--primary); 
+    padding: clamp(12px, 3vw, 16px) clamp(24px, 5vw, 40px); 
+    border-radius: 50px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: clamp(14px, 3.5vw, 16px); 
+    transition: 0.3s; 
+  }
+  .cta-btn:hover { transform: scale(1.05); background: #f8f8f8; }
+
+  /* FOOTER */
+  footer { 
+    background: #0a0a0a; 
+    padding: 60px 5% 30px; 
+    border-top: 1px solid var(--border); 
+    width: 100%;
+  }
+  .footer-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); 
+    gap: 40px; 
+    margin-bottom: 40px; 
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-brand-logo { 
+    height: clamp(35px, 5vw, 42px); 
+    width: auto;
+    margin-bottom: 16px; 
+    display: block; 
+    object-fit: contain; 
+  }
+  .footer-brand-name { 
+    font-size: clamp(20px, 4vw, 22px); 
+    font-weight: 900; 
+    color: var(--primary); 
+    font-family: 'Montserrat', sans-serif; 
+    margin-bottom: 16px; 
+    display: block; 
+  }
+  footer p { 
+    font-size: clamp(12px, 2.8vw, 13px); 
+    color: var(--text-muted); 
+    line-height: 1.7; 
+    margin-bottom: 12px; 
+  }
+  .footer-contact a { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    font-size: clamp(12px, 2.8vw, 13px); 
+    margin-bottom: 8px; 
+    transition: color 0.2s; 
+    word-break: break-word;
+  }
+  .footer-contact a:hover { color: var(--primary); }
+  .footer-col h5 { 
+    font-size: clamp(13px, 3vw, 14px); 
+    font-weight: 700; 
+    color: #fff; 
+    margin-bottom: 16px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    font-size: clamp(12px, 2.8vw, 13px); 
+    transition: color 0.2s; 
+  }
+  .footer-col ul li a:hover { color: var(--primary); }
+  .footer-bottom { 
+    border-top: 1px solid var(--border); 
+    padding-top: 20px; 
+    text-align: center; 
+    font-size: clamp(11px, 2.5vw, 12px); 
+    color: var(--text-muted); 
+  }
+
+  /* PAYMENT METHODS */
+  .payment-methods { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+    margin-top: 20px; 
+    align-items: center; 
+  }
+  .payment-link { display: inline-block; transition: transform 0.2s ease; }
+  .payment-link:hover { transform: translateY(-2px); }
+  .payment-link img { 
+    width: clamp(50px, 12vw, 60px); 
+    height: clamp(30px, 8vw, 40px); 
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .payment-link:hover img { border-color: var(--primary); }
+
+  /* WHATSAPP FLOAT */
+  .wa-float { 
+    position: fixed; 
+    bottom: 90px; 
+    right: clamp(15px, 4vw, 22px); 
+    z-index: 999; 
+    width: clamp(44px, 10vw, 52px); 
+    height: clamp(44px, 10vw, 52px); 
+    background: var(--whatsapp); 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: clamp(22px, 5vw, 26px); 
+    text-decoration: none; 
+    box-shadow: 0 4px 20px rgba(37,211,102,0.5); 
+    animation: pulseWA 2s infinite; 
+  }
+  @keyframes pulseWA { 0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); } 50% { box-shadow: 0 0 0 10px rgba(37,211,102,0); } }
+
+  /* CHAT */
+  .chat-btn { 
+    position: fixed; 
+    bottom: 22px; 
+    right: clamp(15px, 4vw, 22px); 
+    z-index: 999; 
+    background: var(--primary); 
+    color: #fff; 
+    border: none; 
+    border-radius: 28px; 
+    padding: clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 20px); 
+    font-size: clamp(13px, 3vw, 14px); 
+    font-weight: 700; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    font-family: 'Poppins', sans-serif; 
+    box-shadow: 0 4px 20px rgba(230,57,70,0.5); 
+    transition: all 0.3s; 
+  }
+  .chat-btn:hover { background: var(--primary-dark); transform: scale(1.03); }
+  .chat-popup { 
+    position: fixed; 
+    bottom: 80px; 
+    right: clamp(15px, 4vw, 22px); 
+    z-index: 998; 
+    width: min(340px, 90vw); 
+    background: var(--dark3); 
+    border: 1px solid var(--border); 
+    border-radius: 16px; 
+    overflow: hidden; 
+    box-shadow: 0 16px 60px rgba(0,0,0,0.6); 
+    display: none; 
+    flex-direction: column; 
+    max-height: 480px; 
+  }
+  .chat-popup.open { display: flex; }
+  .chat-header { 
+    background: var(--primary); 
+    padding: 14px 16px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+  }
+  .chat-header h4 { 
+    color: #fff; 
+    font-size: clamp(13px, 3vw, 14px); 
+    font-weight: 700; 
+  }
+  .chat-close { 
+    background: none; 
+    border: none; 
+    color: rgba(255,255,255,0.8); 
+    font-size: 20px; 
+    cursor: pointer; 
+    line-height: 1; 
+  }
+  .chat-messages { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding: 14px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+  }
+  .chat-msg { 
+    max-width: 80%; 
+    font-size: clamp(12px, 2.8vw, 13px); 
+    padding: 10px 13px; 
+    border-radius: 10px; 
+    line-height: 1.5; 
+  }
+  .chat-msg.bot { background: var(--dark2); color: var(--text); border-bottom-left-radius: 2px; }
+  .chat-msg.user { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+  .chat-quick { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 6px; 
+    padding: 10px 14px 4px; 
+  }
+  .quick-btn { 
+    background: rgba(230,57,70,0.12); 
+    border: 1px solid rgba(230,57,70,0.3); 
+    color: var(--primary); 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    font-size: clamp(11px, 2.5vw, 12px); 
+    cursor: pointer; 
+    font-family: 'Poppins', sans-serif; 
+    transition: all 0.2s; 
+  }
+  .quick-btn:hover { background: var(--primary); color: #fff; }
+  .chat-input-row { 
+    display: flex; 
+    gap: 8px; 
+    padding: 10px 14px 14px; 
+  }
+  .chat-input-row input { 
+    flex: 1; 
+    background: var(--dark2); 
+    border: 1px solid var(--border); 
+    color: var(--text); 
+    padding: clamp(8px, 2vw, 10px) clamp(10px, 2.5vw, 13px); 
+    border-radius: 8px; 
+    font-size: clamp(12px, 2.8vw, 13px); 
+    font-family: 'Poppins', sans-serif; 
+    outline: none; 
+  }
+  .chat-input-row button { 
+    background: var(--primary); 
+    color: #fff; 
+    border: none; 
+    padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 14px); 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: clamp(13px, 3vw, 14px); 
+  }
+
+  /* COUNTRY FLAGS */
+  .country-flags {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .country-flags span {
+    font-size: clamp(20px, 4vw, 24px);
+    line-height: 1;
+    cursor: default;
+    transition: transform 0.2s;
+    display: inline-block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+  .country-flags span:hover { transform: scale(1.1); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-links { 
+      display: none; 
+      position: fixed; 
+      top: 68px; 
+      left: 0; 
+      right: 0; 
+      background: #111; 
+      flex-direction: column; 
+      padding: 20px; 
+      gap: 4px; 
+      border-bottom: 1px solid var(--border); 
+      max-height: calc(100vh - 68px);
+      overflow-y: auto;
+      z-index: 1000;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links .dropdown { 
+      position: static; 
+      box-shadow: none; 
+      border: none; 
+      padding: 0 0 0 12px; 
+      display: block; 
+    }
+    .hamburger { display: flex; }
+    .features-inner { grid-template-columns: 1fr; }
+    .features-imgs { height: 280px; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { height: 480px; }
+    .pricing-grid { 
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .features-imgs { height: 250px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .partners-track { gap: 15px; }
+    .partner-logo { height: 30px; }
+    .country-flags { 
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-content { padding: 0 5%; }
+    .features-imgs { height: 200px; }
+    .features-imgs img:first-child { width: 60%; }
+    .features-imgs img:nth-child(2) { width: 50%; }
+    .features-imgs img:nth-child(3) { width: 35%; }
+  }
+
+  /* UTILITIES */
+  img { max-width: 100%; height: auto; }
+  .container { width: 100%; max-width: 1400px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR avec drapeaux animés uniquement -->
+<!-- NAVBAR avec logo modifiable -->
+<nav>
+ <div class="nav-logo">
+  <!-- Logo FlexTech Shop IPTV -->
+  <img src="https://i.ibb.co/F4dzfyKx/Chat-GPT-Image-Feb-28-2026-01-55-54-AM.png" alt="FlexTech Shop IPTV Logo">
+</div>
+
+<style>
+.nav-logo { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+.nav-logo img { 
+  height: 42px; 
+  max-width: 160px; 
+  object-fit: contain; 
+}
+</style>
+  
+<span class="country-flags">
+    <span title="Burkina Faso">🇧🇫</span>
+    <span title="Côte d'Ivoire">🇨🇮</span>
+    <span title="Sénégal">🇸🇳</span>
+    <span title="Bénin">🇧🇯</span>
+    <span title="Mali">🇲🇱</span>
+    <span title="Togo">🇹🇬</span>
+    <span title="Niger">🇳🇪</span>
+</span>
+  
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#">Accueil</a></li>
+    <li><a href="#pricing">Nos Packs</a></li>
+    <li><a href="#">Applications IPTV</a></li>
+    <li><a href="#">FAQ</a></li>
+    <li><a href="#">Blog</a></li>
+    <li>
+      <a href="#">Plus + ▾</a>
+      <div class="dropdown">
+        <a href="#">À propos</a>
+        <a href="#">Contact</a>
+        <a href="#">Panneau Revendeur</a>
+        <a href="#pricing">Tarifs</a>
+        <a href="#">Films/Séries</a>
+      </div>
+    </li>
+    <li><a href="https://wa.me/22656853244" class="nav-cta">🆓 Essai Gratuit</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO SLIDER (un seul slide conservé) -->
+<div class="hero">
+  <div class="hero-slide active">
+    <div class="hero-bg" style="background-image:url('https://opplexiptv.com/webp_images/c56613b92cc51376db0c4bfb3b913227.webp');background-color:#1a0a2e"></div>
+    <div class="hero-content">
+      <span class="hero-badge">🎬 EN STREAMING</span>
+      <h1>Regardez Scrubs en Direct HD</h1>
+      <p>J.D. & Turk se retrouvent pour la première fois depuis longtemps — la médecine a changé, mais leur bromance a résisté au temps.</p>
+      <a href="https://wa.me/22656853244" class="hero-btn">🛒 Acheter IPTV Films & Séries</a>
+    </div>
+  </div>
+  <div class="hero-gradient"></div>
+</div>
+
+<!-- PRICING avec prix F CFA - UNIQUEMENT OPPLEX (Starshare supprimé) -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-header">
+    <span class="section-label">💎 Nos Offres</span>
+    <h2 class="section-title">Meilleurs Plans IPTV — Streaming 4K, Essai Gratuit</h2>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:20px;">TV en direct, Sports, Films, Séries, 4K & Rattrapage</p>
+    <div style="display:flex;justify-content:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+      <div class="toggle-group">
+        <button class="toggle-btn active" onclick="switchType('iptv',this)">Abonnements IPTV</button>
+        <button class="toggle-btn" onclick="switchType('reseller',this)">Packs Revendeur</button>
+      </div>
+    </div>
+    <!-- Ligne vendor supprimée (Starshare) -->
+  </div>
+  <div class="pricing-panels">
+    <!-- IPTV OPPLEX -->
+    <div id="iptv-opplex" class="active">
+      <div class="pricing-grid">
+        <div class="price-card"><h3>1 Mois</h3><div class="price-amount">2 594<span> F CFA</span></div><ul class="price-features"><li>Streaming 4K sans coupure</li><li>Support 24/7</li><li>Mises à jour régulières</li><li>Films, Séries, Chaînes live</li></ul><a href="https://flextechshop.github.io/IPTV-Forfait-1-mois-/" class="btn-buy">Acheter</a></div>
+        <div class="price-card"><h3>3 Mois</h3><div class="price-amount">7 000<span> F CFA</span></div><ul class="price-features"><li>Streaming 4K sans coupure</li><li>Support 24/7</li><li>Mises à jour régulières</li><li>Films, Séries, Chaînes live</li></ul><a href="https://flextechshop.github.io/IPTV-Forfait-3-mois/" class="btn-buy">Acheter</a></div>
+        <div class="price-card popular"><span class="popular-badge">POPULAIRE</span><h3>6 Mois</h3><div class="price-amount">12 000<span> F CFA</span></div><ul class="price-features"><li>Streaming 4K sans coupure</li><li>Support 24/7</li><li>Mises à jour régulières</li><li>Films, Séries, Chaînes live</li></ul><a href="https://flextechshop.github.io/IPTV-Forfait-6-mois/" class="btn-buy">Acheter</a></div>
+        <div class="price-card"><h3>12 Mois</h3><div class="price-amount">18 000<span> F CFA</span></div><ul class="price-features"><li>Streaming 4K sans coupure</li><li>Support 24/7</li><li>Mises à jour régulières</li><li>Films, Séries, Chaînes live</li></ul><a href="https://flextechshop.github.io/IPTV-Forfait-12-mois/" class="btn-buy">Acheter</a></div>
+      </div>
+    </div>
+    <!-- RESELLER OPPLEX -->
+    <div id="reseller-opplex">
+      <div class="pricing-grid">
+        <div class="price-card"><h3>Starter (20 Crédits)</h3><div class="price-amount">10 194<span> F CFA</span></div><ul class="price-features"><li>99.9% Uptime</li><li>Crédits sans expiration</li><li>Essais gratuits illimités</li><li>Xtreme HD & Smart Player</li></ul><a href="https://flextechshop.github.io/IPTV-Pack-1/" class="btn-buy">Acheter</a></div>
+        <div class="price-card"><h3>Essentiel (50 Crédits)</h3><div class="price-amount">24 594<span> F CFA</span></div><ul class="price-features"><li>99.9% Uptime</li><li>Crédits sans expiration</li><li>Essais gratuits illimités</li><li>Xtreme HD & Smart Player</li></ul><a href="https://flextechshop.github.io/IPTV-Pack-2/" class="btn-buy">Acheter</a></div>
+        <div class="price-card popular"><span class="popular-badge">MEILLEURE VALEUR</span><h3>Pro (100 Crédits)</h3><div class="price-amount">46 794<span> F CFA</span></div><ul class="price-features"><li>99.9% Uptime</li><li>Crédits sans expiration</li><li>Essais gratuits illimités</li><li>Xtreme HD & Smart Player</li></ul><a href="https://flextechshop.github.io/IPTV-Pack-3/" class="btn-buy">Acheter</a></div>
+        <div class="price-card"><h3>Avancé (200 Crédits)</h3><div class="price-amount">89 994<span> F CFA</span></div><ul class="price-features"><li>99.9% Uptime</li><li>Crédits sans expiration</li><li>Essais gratuits illimités</li><li>Xtreme HD & Smart Player</li></ul><a href="https://flextechshop.github.io/IPTV-Pack-4/" class="btn-buy">Acheter</a></div>
+      </div>
+    </div>
+    <p>1 credit est equivaut a 1 mois </p>
+    <!-- Les panneaux iptv-starshare et reseller-starshare ont été supprimés -->
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section style="background:var(--dark);padding:80px 5%;">
+  <div class="features-inner">
+    <div class="features-imgs">
+      <img src="https://opplexiptv.com/images/resource/network-4.webp" alt="Streaming IPTV" onerror="this.style.cssText='position:absolute;width:65%;left:0;top:0;height:55%;background:linear-gradient(135deg,#1a1a2e,#2a1a3e);border-radius:12px'">
+      <img src="https://opplexiptv.com/images/resource/network-5.webp" alt="Contenu IPTV" onerror="this.style.cssText='position:absolute;width:55%;right:0;top:38%;height:50%;background:linear-gradient(135deg,#2a1a1e,#1a2a2e);border-radius:12px'">
+      <img src="https://opplexiptv.com/images/resource/network-3.webp" alt="Connexion IPTV" onerror="this.style.cssText='position:absolute;width:40%;left:10%;top:58%;z-index:2;height:38%;background:linear-gradient(135deg,#1a2a1e,#2a2a1a);border-radius:12px'">
+    </div>
+    <div>
+      <span class="section-label">⚡ Pourquoi Nous Choisir</span>
+      <h2 class="section-title">IPTV Illimité en 4K — Essai Gratuit Inclus</h2>
+      <ul class="features-list">
+        <li><div class="feat-icon">📺</div><div><strong>Streaming HD & 4K sans coupure</strong>Regardez vos chaînes en qualité cristalline avec Xtreme HD IPTV sur Smart TV, Android, boîtiers.</div></li>
+        <li><div class="feat-icon">💰</div><div><strong>Forfaits flexibles avec essai gratuit</strong>Choisissez parmi des abonnements mensuels, semestriels ou annuels aux meilleurs prix.</div></li>
+        <li><div class="feat-icon">🔒</div><div><strong>Fiabilité 99.9%</strong>Profitez d'un streaming sans buffering, reconnu en France, Italie, UK et Afrique.</div></li>
+        <li><div class="feat-icon">📱</div><div><strong>Installation facile sur tous vos appareils</strong>Smart TV, MAG, Firestick, iOS, Android — essai gratuit pour les nouveaux.</div></li>
+      </ul>
+      <a href="https://wa.me/22656853244" class="hero-btn"> Démarrer l'essai gratuit</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="text-center">
+    <span class="section-label">🌟 Nos Services</span>
+    <h2 class="section-title">Top Services IPTV avec Streaming 4K</h2>
+    <p class="section-sub">Tout ce qu'il vous faut pour une expérience de streaming ultime</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon-box">📦</div><h4>Meilleurs Abonnements IPTV</h4><p>Forfaits abordables incluant Xtreme HD IPTV & Smart Player — 12k+ chaînes live et support 4K.</p></div>
+    <div class="service-card"><div class="service-icon-box">💼</div><h4>Devenez Revendeur IPTV</h4><p>Rejoignez le programme revendeur FlexTech et gagnez de l'argent en vendant en Afrique et dans le monde.</p></div>
+    <div class="service-card"><div class="service-icon-box">⚽</div><h4>Sport en Direct HD</h4><p>Foot, cricket, UFC, et plus avec IPTV 4K sans buffer — compatible Smart Player.</p></div>
+    <div class="service-card"><div class="service-icon-box">🎬</div><h4>VOD Premium — 50k+ Films</h4><p>Streaming de 50 000+ films et 5 000+ séries via Xtreme HD IPTV.</p></div>
+    <div class="service-card"><div class="service-icon-box">📱</div><h4>IPTV sur tous les appareils</h4><p>Utilisez IPTV Smart Player sur Smart TV, iPhone, Android, Firestick, MAG — essai gratuit.</p></div>
+  </div>
+</section>
+<section>
+<!-- PRODUITS -->
+<!-- SECTION PUBLICITAIRE - PARTENAIRES -->
+<div style="margin: 50px 0 30px; border-top: 2px solid rgba(230,57,70,0.3); padding-top: 30px;">
+  
+  <!-- En-tête de la section -->
+  <div style="text-align: center; margin-bottom: 30px;">
+    <span style="background: #e63946; color: white; padding: 8px 30px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px;"> PARTENAIRES DE CONFIANCE 📢</span>
+  </div>
+  
+  <!-- Grille des annonceurs -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 25px; margin-top: 25px;">
+    
+    <!-- Annonceur 1 - LKAF ÉLECTROMÉNAGER -->
+    <div style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #e63946; border-radius: 20px; padding: 25px 20px; box-shadow: 0 10px 25px rgba(230,57,70,0.2); transition: transform 0.3s; text-align: center;"
+         onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+      
+      <!-- EMPLACEMENT LOGO ENTREPRISE -->
+      <div style="width: 120px; height: 120px; border-radius: 50%; background: #2a2a2a; margin: 0 auto 15px; border: 3px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <img src="https://i.ibb.co/hxWhMYGk/Screenshot-2026-03-01-01-41-12-185-com-facebook-katana-edit.jpg" alt="Logo LKAF ÉLECTROMÉNAGER" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='🏪'; this.parentElement.style.fontSize='3rem'; this.parentElement.style.background='#2a2a2a';">
+      </div>
+      
+      <h3 style="color: #e63946; font-size: 1.6rem; margin-bottom: 5px; font-weight: 700;">LKAF ÉLECTROMÉNAGER</h3>
+      <div style="background: #f4a261; color: black; display: inline-block; padding: 4px 15px; border-radius: 30px; font-weight: 600; font-size: 0.8rem; margin-bottom: 15px;">📍 OUAGADOUGOU UNIQUEMENT</div>
+      
+      <!-- EMPLACEMENTS PRODUITS (2) -->
+      <div style="display: flex; gap: 10px; justify-content: center; margin: 15px 0;">
+        <div style="width: 70px; height: 70px; border-radius: 10px; background: #333; border: 1px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="https://i.ibb.co/YTdWW0C7/IMG-20260301-015739.jpg" alt="Produit 1" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML=''; this.parentElement.style.fontSize='2rem';">
+        </div>
+        <div style="width: 70px; height: 70px; border-radius: 10px; background: #333; border: 1px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="https://i.ibb.co/rGyXF80q/IMG-20260301-015753.jpg" alt="Produit 2" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML=''; this.parentElement.style.fontSize='2rem';">
+        </div>
+      </div>
+      
+      <p style="color: #aaa; font-style: italic; margin: 15px 0; font-size: 0.9rem; background: rgba(230,57,70,0.1); padding: 10px; border-radius: 8px;">
+        "Votre maison mérite le meilleur ! Livraison rapide et prix imbattables sur tout Ouagadougou."
+      </p>
+      
+      <a href="https://wa.me/22656823792?text=Bonjour%20LKAF%20ÉLECTROMÉNAGER%2C%20je%20suis%20intéressé(e)%20par%20vos%20produits.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20%3F" 
+         target="_blank"
+         style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; text-decoration: none; padding: 14px 25px; border-radius: 50px; font-weight: 600; margin-top: 10px; width: 100%; transition: background 0.3s;"
+         onmouseover="this.style.background='#128C7E'" onmouseout="this.style.background='#25D366'">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' width='20' height='20'%3E%3Cpath fill='white' d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.2-99.6 224.2-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 81.8 13.2 5.2 23.5 8.3 31.6 10.6 13.3 3.8 25.4 3.2 34.9 1.9 10.6-1.4 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.3-5-3.7-10.6-6.5z'/%3E%3C/svg%3E" 
+             alt="WhatsApp" style="width: 20px; height: 20px;">
+        Commander sur WhatsApp : +226 56 82 37 92
+      </a>
+    </div>
+    
+    <!-- Annonceur 2 - JPP Agence -->
+    <div style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #e63946; border-radius: 20px; padding: 25px 20px; box-shadow: 0 10px 25px rgba(230,57,70,0.2); transition: transform 0.3s; text-align: center;"
+         onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+      
+      <!-- EMPLACEMENT LOGO ENTREPRISE -->
+      <div style="width: 120px; height: 120px; border-radius: 50%; background: #2a2a2a; margin: 0 auto 15px; border: 3px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <img src="https://i.ibb.co/sp6d0hWK/Screenshot-2026-03-01-01-46-06-303-com-whatsapp-edit.jpg" alt="Logo JPP Agence" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='🎨'; this.parentElement.style.fontSize='3rem'; this.parentElement.style.background='#2a2a2a';">
+      </div>
+      
+      <h3 style="color: #e63946; font-size: 1.6rem; margin-bottom: 5px; font-weight: 700;">JPP AGENCE</h3>
+      <div style="background: #f4a261; color: black; display: inline-block; padding: 4px 15px; border-radius: 30px; font-weight: 600; font-size: 0.8rem; margin-bottom: 15px;">🇧🇫 BURKINA FASO</div>
+      
+      <!-- EMPLACEMENTS PRODUITS (2) -->
+      <div style="display: flex; gap: 10px; justify-content: center; margin: 15px 0;">
+        <div style="width: 70px; height: 70px; border-radius: 10px; background: #333; border: 1px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="https://i.ibb.co/JRmDBqW6/Screenshot-2026-03-01-02-04-58-804-com-miui-gallery-edit.jpg" alt="Création flyer" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📄'; this.parentElement.style.fontSize='2rem';">
+        </div>
+        <div style="width: 70px; height: 70px; border-radius: 10px; background: #333; border: 1px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="https://i.ibb.co/xKvXnzmz/Screenshot-2026-03-01-02-07-06-822-com-whatsapp-edit.jpg" alt="Création logo" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='🎯'; this.parentElement.style.fontSize='2rem';">
+        </div>
+      </div>
+      
+      <p style="color: #e0e0e0; line-height: 1.6; margin: 15px 0; text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px;">
+        <span style="color: #f4a261; font-weight: 600; display: block; margin-bottom: 8px;">✨ NOS SERVICES CRÉATIFS :</span>
+        • Conception d'affiches professionnelles ️,montage videos d'evènements.<br>
+        • Création de flyers & dépliants 📄<br>
+        • Design de logos & identité visuelle 🎯<br>
+        • Bannières publicitaires (print & web) 📢<br>
+        • Cartes de visite & papeterie 💼<br>
+        • Supports de communication d'entreprise 🏢
+      </p>
+      
+      <p style="color: #aaa; font-style: italic; margin: 15px 0; font-size: 0.9rem; background: rgba(230,57,70,0.1); padding: 10px; border-radius: 8px;">
+        "Donnez vie à vos idées avec des designs percutants qui marquent les esprits !"
+      </p>
+      
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+        <a href="https://wa.me/22656326826?text=Bonjour%20JPP%20Agence%2C%20je%20souhaite%20des%20informations%20sur%20vos%20services%20de%20création%20graphique." 
+           target="_blank"
+           style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; text-decoration: none; padding: 12px 20px; border-radius: 50px; font-weight: 600; width: 100%; transition: background 0.3s;"
+           onmouseover="this.style.background='#128C7E'" onmouseout="this.style.background='#25D366'">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' width='20' height='20'%3E%3Cpath fill='white' d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.2-99.6 224.2-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 81.8 13.2 5.2 23.5 8.3 31.6 10.6 13.3 3.8 25.4 3.2 34.9 1.9 10.6-1.4 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.3-5-3.7-10.6-6.5z'/%3E%3C/svg%3E" 
+               alt="WhatsApp" style="width: 20px; height: 20px;">
+          WhatsApp : +226 56 32 68 26
+        </a>
+        
+        <a href="https://wa.me/c/245315965870145" 
+           target="_blank"
+           style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #f4a261; color: black; text-decoration: none; padding: 12px 20px; border-radius: 50px; font-weight: 600; width: 100%; transition: background 0.3s;"
+           onmouseover="this.style.background='#e07c2c'" onmouseout="this.style.background='#f4a261'">
+          📂 Voir le catalogue
+        </a>
+      </div>
+    </div>
+    
+    <!-- Annonceur 3 - Joseph Manga (Sénégal) -->
+    <div style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #e63946; border-radius: 20px; padding: 25px 20px; box-shadow: 0 10px 25px rgba(230,57,70,0.2); transition: transform 0.3s; text-align: center;"
+         onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+      
+      <!-- EMPLACEMENT LOGO ENTREPRISE -->
+      <div style="width: 120px; height: 120px; border-radius: 50%; background: #2a2a2a; margin: 0 auto 15px; border: 3px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <img src="https://i.ibb.co/qYwhVfbV/IMG-20260301-WA0006.jpg" alt="Logo Joseph Manga" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📱'; this.parentElement.style.fontSize='3rem'; this.parentElement.style.background='#2a2a2a';">
+      </div>
+      
+      <h3 style="color: #e63946; font-size: 1.6rem; margin-bottom: 5px; font-weight: 700;">GAS Alibaba Academy</h3>
+      <div style="background: #f4a261; color: black; display: inline-block; padding: 4px 15px; border-radius: 30px; font-weight: 600; font-size: 0.8rem; margin-bottom: 15px;">🇸🇳 SÉNÉGAL</div>
+      
+      <!-- EMPLACEMENTS PRODUITS (2) -->
+      <div style="display: flex; gap: 10px; justify-content: center; margin: 15px 0;">
+        <div style="width: 70px; height: 70px; border-radius: 10px; background: #333; border: 1px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="https://i.ibb.co/JR2z4Szp/997365fc94842f0ec407f77476402341.jpg" alt="Canva Pro" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='🎨'; this.parentElement.style.fontSize='2rem';">
+        </div>
+        <div style="width: 70px; height: 70px; border-radius: 10px; background: #333; border: 1px solid #e63946; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="https://i.ibb.co/HfWdB3jY/2beb978648a6c369964817db87bebb30.jpg" alt="CapCut Pro" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='✂️'; this.parentElement.style.fontSize='2rem';">
+        </div>
+      </div>
+      
+      <p style="color: #e0e0e0; line-height: 1.6; margin: 15px 0; text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px;">
+        <span style="color: #f4a261; font-weight: 600; display: block; margin-bottom: 8px;">💻 PRODUITS DIGITAUX :</span>
+        • Abonnements CapCut Pro,Chatgpt ✂️<br>
+        • Licences Canva Pro 🎨<br>
+        • Accès VEO 3 (montage vidéo) 🎬<br>
+        • Kling AI (intelligence artificielle) 🤖<br>
+        • Formations en ligne & e-books 📚<br>
+        • Templates & ressources créatives 🧩
+      </p>
+      
+      <p style="color: #aaa; font-style: italic; margin: 15px 0; font-size: 0.9rem; background: rgba(230,57,70,0.1); padding: 10px; border-radius: 8px;">
+        "Boostez votre créativité avec des outils professionnels à prix abordable !"
+      </p>
+      <a href="https://wa.me/221782461234?text=Bonjour%20Joseph%2C%20je%20suis%20intéressé(e)%20par%20vos%20produits%20digitaux.%20Pouvez-vous%20me%20renseigner%20%3F" 
+         target="_blank"
+         style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; text-decoration: none; padding: 14px 25px; border-radius: 50px; font-weight: 600; margin-top: 10px; width: 100%; transition: background 0.3s;"
+         onmouseover="this.style.background='#128C7E'" onmouseout="this.style.background='#25D366'">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' width='20' height='20'%3E%3Cpath fill='white' d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.2-99.6 224.2-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 81.8 13.2 5.2 23.5 8.3 31.6 10.6 13.3 3.8 25.4 3.2 34.9 1.9 10.6-1.4 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.3-5-3.7-10.6-6.5z'/%3E%3C/svg%3E" 
+             alt="WhatsApp" style="width: 20px; height: 20px;">
+        Commander sur WhatsApp : +221 78 246 12 34
+      </a>
+    </div>
+  </div>
+  </section>
+  <!-- Pied de section -->
+  <div style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #888; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+    ⚡ Devenez partenaire • Contactez-nous pour exposer votre entreprise ici ⚡
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="text-center" style="margin-bottom:40px;">
+    <span class="section-label">⭐ Avis Clients</span>
+    <h2 class="section-title">Ce que disent nos utilisateurs en Afrique et en Europe</h2>
+  </div>
+  <div class="testimonials-track-wrap">
+    <div class="testimonials-track">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Le meilleur IPTV que j'ai utilisé — 12k+ chaînes, zéro buffer, qualité HD via Xtreme HD IPTV."</p><div class="testi-author"><img src="https://opplexiptv.com/images/img-test-2.webp" class="testi-avatar" alt=""><div class="testi-name">Amaan Khalid</div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Je regarde Aroma IPTV sur Smart TV, la qualité est incroyable. Meilleure alternative au boîtier IPTV."</p><div class="testi-author"><img src="https://opplexiptv.com/images/img-test-3.webp" class="testi-avatar" alt=""><div class="testi-name">Nouman Shahid</div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Passé du câble à FlexTech Shop — Xtreme HD IPTV et smart player rendent tout plus fluide."</p><div class="testi-author"><img src="https://opplexiptv.com/images/resource/author-1.webp" class="testi-avatar" alt=""><div class="testi-name">Michael</div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Aucun buffer sur IPTV smart player, super support, fonctionne parfaitement sur Firestick."</p><div class="testi-author"><img src="https://opplexiptv.com/images/resource/author-2.webp" class="testi-avatar" alt=""><div class="testi-name">Sarah</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTENAIRES -->
+<div class="partners-section">
+  <div class="partners-track">
+    <img src="https://opplexiptv.com/images/resource/8.webp" alt="Partenaire" class="partner-logo" onerror="this.style.display='none'">
+    <img src="https://opplexiptv.com/images/resource/2.webp" alt="Partenaire" class="partner-logo" onerror="this.style.display='none'">
+    <img src="https://opplexiptv.com/images/resource/3.webp" alt="Partenaire" class="partner-logo" onerror="this.style.display='none'">
+    <img src="https://opplexiptv.com/images/resource/4.webp" alt="Partenaire" class="partner-logo" onerror="this.style.display='none'">
+  </div>
+</div>
+
+<!-- CTA BANNER -->
+<div class="cta-section">
+  <h2>🎉 Essayez notre IPTV gratuitement avec Streaming 4K et 12k Chaînes !</h2>
+  <p>Rejoignez des milliers de clients satisfaits en Afrique et en Europe. Pas de carte bancaire demandée.</p>
+  <a href="https://wa.me/22656853244" class="cta-btn">💬 Commencer l'essai gratuit IPTV</a>
+</div>
+
+<!-- FOOTER (colonne légale supprimée, Ouagadougou supprimé) -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">
+  <img src="https://i.ibb.co/F4dzfyKx/Chat-GPT-Image-Feb-28-2026-01-55-54-AM.png" 
+       alt="FlexTech Shop Logo" 
+       class="footer-brand-logo">
+  <div class="footer-brand-name">FLEX TECH SHOP</div>
+</div>
+
+<style>
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-brand-logo { 
+  height: 42px; 
+  width: auto;
+  margin-bottom: 16px; 
+  display: block; 
+  object-fit: contain; 
+}
+
+.footer-brand-name { 
+  font-size: 22px; 
+  font-weight: 900; 
+  color: var(--primary); 
+  font-family: 'Montserrat', sans-serif; 
+  margin-bottom: 16px; 
+  display: block; 
+}
+
+/* Note: Le placeholder a été supprimé car nous affichons directement l'image */
+</style>
+      <p>Nous fournissons le meilleur service IPTV avec streaming 4K, 12k+ chaînes, et un essai gratuit. Approuvé par des utilisateurs en Afrique et en Europe.</p>
+      <p>Paiements acceptés :</p>
+    <div class="payment-methods">
+  <a href="#" class="payment-link" title="Orange Money">
+   <img src="https://i.ibb.co/j9SWTnb4/resized-1.jpg" alt="resized 1" border="0">
+  </a>
+  <a href="#" class="payment-link" title="Wave">
+    <img src="https://i.ibb.co/hRxj8sKm/resized-3.jpg" alt="resized 3" border="0">
+  </a>
+  <a href="#" class="payment-link" title="Moov Money">
+    <img src="https://i.ibb.co/HDhmftpc/resized-2.jpg" alt="resized 2" border="0">
+  </a>
+  <a href="#" class="payment-link" title="Binance">
+    <img src="https://i.ibb.co/Xrp9fvf4/resized-4.jpg" alt="resized 4" border="0">
+  </a>
+</div>
+
+<style>
+.payment-methods { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 15px; 
+  margin-top: 20px; 
+  align-items: center; 
+}
+
+.payment-link {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.payment-link:hover {
+  transform: translateY(-2px);
+}
+
+.payment-link img { 
+  width: 60px; 
+  height: 40px; 
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.payment-link:hover img {
+  border-color: var(--primary);
+}
+
+/* Note: Pour remplacer par vos vraies images, remplacez les URLs via.placeholder.com par vos liens réels */
+</style><br><br>
+      <div class="footer-contact">
+        <a href="mailto:tvrai26@gmail.com">✉️ tvrai26@gmail.com</a>
+        <a href="https://wa.me/22656853244">📱 +226 56 85 32 44</a>
+        <!-- La localisation a été supprimée -->
+      </div>
+    </div>
+    <div class="footer-col"><h5>Explorer</h5><ul><li><a href="#">Accueil</a></li><li><a href="#pricing">Tarifs</a></li><li><a href="#pricing">Nos Packs</a></li><li><a href="#">Panneau Revendeur</a></li><li><a href="#">Films/Séries</a></li><li><a href="#">Applications IPTV</a></li><li><a href="#">Boutique</a></li></ul></div>
+    <div class="footer-col"><h5>Entreprise</h5><ul><li><a href="#">À propos</a></li><li><a href="#">Contact</a></li><li><a href="#">FAQ</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2022 - 2026 <strong>FlexTech Shop IPTV</strong>. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="wa.me/22656853244" class="wa-float" target="_blank" title="Chat WhatsApp">💬</a>
+
+<!-- CHAT ASSISTANT -->
+<button class="chat-btn" onclick="toggleChat()">🤖 Assistant IA</button>
+<div class="chat-popup" id="chatPopup">
+  <div class="chat-header">
+    <h4>🤖 Assistant FlexTech</h4>
+    <button class="chat-close" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">👋 Bonjour ! Je suis l'assistant FlexTech IPTV. Comment puis-je vous aider ?</div>
+  </div>
+  <div class="chat-quick">
+    <button class="quick-btn" onclick="quickMsg('Tarifs')">Tarifs</button>
+    <button class="quick-btn" onclick="quickMsg('Packs')">Packs</button>
+    <button class="quick-btn" onclick="quickMsg('Essai gratuit')">Essai gratuit</button>
+    <button class="quick-btn" onclick="quickMsg('Contact')">Contact</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Écrivez un message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<script>
+// HERO SLIDER (un seul slide, pas de défilement)
+// PRICING (uniquement Opplex)
+let curType = 'iptv'; // par défaut
+
+function switchType(t, btn) {
+  curType = t;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updatePanel();
+}
+function updatePanel() {
+  document.querySelectorAll('.pricing-panels > div').forEach(d => d.classList.remove('active'));
+  // Les IDs sont maintenant iptv-opplex et reseller-opplex
+  const p = document.getElementById(curType + '-opplex');
+  if (p) p.classList.add('active');
+}
+
+// CHAT (réponses en français)
+const botReplies = {
+  'tarifs': 'Nos abonnements commencent à 2 594 F CFA/mois pour Opplex IPTV ! Voir la section tarifs ci-dessus. 📦',
+  'packs': 'Nous offrons Mensuel (2 594 F), 3 Mois (7 000 F), 6 Mois (12 000 F), 12 Mois (18 000 F) pour Opplex. 🎬',
+  'essai gratuit': 'Oui ! Nous offrons un essai gratuit IPTV. Contactez-nous sur WhatsApp : +226 56 85 32 44 💬',
+  'contact': 'Rejoignez-nous sur WhatsApp : +226 56 85 32 44 ou email : tvrai26@gmail.com ',
+};
+function toggleChat() { document.getElementById('chatPopup').classList.toggle('open'); }
+function addMsg(text, type) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function quickMsg(msg) {
+  addMsg(msg, 'user');
+  const key = msg.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  setTimeout(() => addMsg(botReplies[key] || botReplies['contact'], 'bot'), 600);
+}
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  addMsg(msg, 'user');
+  const key = Object.keys(botReplies).find(k => msg.toLowerCase().includes(k));
+  setTimeout(() => addMsg(botReplies[key] || botReplies['contact'], 'bot'), 600);
+}
+
+// Fermer le menu mobile lors du clic sur un lien
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
